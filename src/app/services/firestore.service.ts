@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, deleteUser, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
-import { AuthUser } from '../interfaces/authUser';
+import { AuthUser } from '../interfaces/AuthUser';
 import { from, Observable } from 'rxjs';
 
 @Injectable({
