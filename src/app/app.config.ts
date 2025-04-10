@@ -7,6 +7,15 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 
+import { environment } from '../environments/environment.development';
+
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideFirebaseApp(() => initializeApp({ projectId: "shareit-b27df", appId: "1:690325998479:web:d2746071a93134bc7d19fa", storageBucket: "shareit-b27df.firebasestorage.app", apiKey: "AIzaSyDywOHc0j3D7zFby-llDhSN7qRLwFANIrQ", authDomain: "shareit-b27df.firebaseapp.com", messagingSenderId: "690325998479" })), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage())]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+  ],
 };
