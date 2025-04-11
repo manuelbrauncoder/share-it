@@ -36,7 +36,7 @@ export class AuthenticationService {
         // do things after login
       })
       .catch((err) => {
-        // handle error
+        throw err;
       });
     return from(promise);
   }

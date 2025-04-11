@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthUser } from '../../interfaces/AuthUser';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
+import { UserHelper } from '../../helpers/UserHelper';
 
 @Component({
   selector: 'app-login-form',
@@ -13,6 +17,9 @@ import {
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent {
+  authService = inject(AuthenticationService);
+  router = inject(Router);
+
   user = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     pwd: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -20,12 +27,27 @@ export class LoginFormComponent {
 
   submit() {
     if (this.user.valid) {
-      console.log("User:", this.user.value);
-      
+      const authUser = UserHelper.createAuthUser(this.user);
+      this.loginUser(authUser);
     } else {
       this.user.markAllAsTouched();
-      console.log("invalid");
-      
+      console.log('invalid');
     }
+  }
+
+  loginUser(user: AuthUser) {
+    this.authService.login(user).subscribe({
+      next: () => {
+        // show toast message success
+        this.user.reset();
+        setTimeout(() => {
+          this.router.navigate(['/start']);
+        }, 2000);
+      },
+      error: (err) => {
+        // show toast message error
+        console.log('error', err);
+      },
+    });
   }
 }

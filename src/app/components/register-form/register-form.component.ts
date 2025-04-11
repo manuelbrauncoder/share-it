@@ -8,9 +8,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthUser } from '../../interfaces/AuthUser';
-import { v4 as uuidv4 } from 'uuid';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { UserHelper } from "../../helpers/UserHelper";
 
 @Component({
   selector: 'app-register-form',
@@ -37,7 +37,7 @@ export class RegisterFormComponent {
 
   submit() {
     if (this.user.valid) {
-      const authUser = this.createAuthUser();
+      const authUser = UserHelper.createAuthUser(this.user);
       this.registerUser(authUser);
     } else {
       this.user.markAllAsTouched();
@@ -56,19 +56,10 @@ export class RegisterFormComponent {
       },
       error: (err) => {
         // show toast message error
-        console.log('error');
+        console.log('error', err);
         
       },
     });
-  }
-
-  createAuthUser(): AuthUser {
-    return {
-      email: this.user.get('email')?.value ?? '',
-      name: this.user.get('name')?.value ?? '',
-      id: uuidv4(),
-      pwd: this.user.get('pwd')?.value ?? '',
-    };
   }
 
   passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
