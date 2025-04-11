@@ -1,0 +1,27 @@
+@use '../../../styles.scss' as *;
+
+section {
+    @include dFlex($fd: column, $g: 2rem, $jc: space-between);
+    @extend .contentMinHeight;
+
+    .logo {
+
+    }
+    
+    .welcome {
+        @include dFlex($fd: column, $g: 0.5rem);
+        max-width: 75%;
+    
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+    }
+
+    button {
+        margin-top: auto;
+    }
+}

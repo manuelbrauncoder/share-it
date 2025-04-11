@@ -13,7 +13,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/register/register.component').then((m) => m.RegisterComponent)
     },
     {
-        path: 'home',
+        path: 'start',
         loadComponent: () => import('./pages/start-screen/start-screen.component').then((m) => m.StartScreenComponent)
     },
     {

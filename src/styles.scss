@@ -8,6 +8,8 @@ $color-black-bg: #1c1c1c;
 $color-blur-bg: #FFFFFF1F;
 $color-error-red: #EC7B7BCC;
 
+$height-header-footer: 80px;
+
 @mixin dFlex($fd: row, $jc: center, $ai: center, $g: 0) {
     display: flex;
     flex-direction: $fd;
@@ -28,16 +30,33 @@ $color-error-red: #EC7B7BCC;
 
 html {
     scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Roboto';
+    color: $color-not-white;
+}
+
+a {
+    text-decoration: none;
 }
 
 .content-wrapper {
-    min-height: calc(100dvh - 160px);
-    background-color: $color-v2-green-30;
+    background-color: $color-black-bg;
+    padding: 0.75rem;
+}
+
+.box {
+    border: 1px solid $color-v2-green-100;
+    background-color: $color-v2-green-10;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
 }
 
 app-header,
 app-footer {
-    height: 80px;
+    height: $height-header-footer;
     display: block;
     background-color: $color-v2-green-10;
 }
@@ -46,16 +65,21 @@ app-footer {
     transition: 125ms ease-out;
 }
 
+.contentMinHeight {
+    min-height: calc(100dvh - ($height-header-footer * 2));
+}
+
 .primary-btn {
     @include dFlex($g: 0.625rem);
     @extend .hover-transition;
-    border: 1px solid white;
+    border: 1px solid $color-v2-green-100;
     border-radius: 100vw;
     background-color: transparent;
     color: white;
-    padding: 0.8rem 1.5rem;
+    padding: 0.5rem 1.25rem;
     cursor: pointer;
     overflow: hidden;
+    font-size: 1.25rem;
 
     &:not(:disabled):hover {
         border: 1px solid $color-v2-green-100;
@@ -80,9 +104,11 @@ app-footer {
     border-radius: 100vw;
     background-color: transparent;
     color: white;
-    padding: 0.8rem 1.5rem;
+    padding: 0.5rem 1.25rem;
     cursor: pointer;
     @extend .hover-transition;
+    font-size: 1.25rem;
+
 
     img {
         @extend .hover-transition;
@@ -104,19 +130,66 @@ app-footer {
     }
 }
 
+form {
+    width: 100%;
+    @include dFlex($fd: column, $g: 1rem);
+
+    fieldset {
+        border: unset;
+        @include dFlex($fd: column, $ai: flex-start, $g: 0.5rem);
+
+        .form-field {
+            @include dFlex($fd: column, $ai: flex-start, $g: 0.25rem);
+
+            label {
+                font-size: 0.9rem;
+            }
+
+            input {
+                font-size: 1.25rem;
+                background-color: unset;
+                border: unset;
+                border-bottom: 1px solid $color-v2-green-100;
+                color: $color-not-white;
+                padding: 0.25rem 1rem;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+    }
+}
+
 ::-webkit-scrollbar {
     width: 6px;
-  }
-  
-  ::-webkit-scrollbar-track {
+}
+
+::-webkit-scrollbar-track {
     background: $color-black-bg;
-  }
-  
-  ::-webkit-scrollbar-thumb {
+}
+
+::-webkit-scrollbar-thumb {
     background: linear-gradient($color-black-bg, $color-v2-green-100, $color-black-bg);
     border-radius: 30px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient($color-black-bg, $color-v2-green-50, $color-black-bg);
-  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    border: unset;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px $color-black-bg inset;
+    transition: background-color 5000s ease-in-out 0s;
+    font-family: 'Roboto';
+}
