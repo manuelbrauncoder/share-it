@@ -1,0 +1,6 @@
+@use '../../../styles.scss' as *;
+
+.toast {
+    color: $color-not-white;
+    border: 1px solid $color-v2-green-100;
+}

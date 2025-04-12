@@ -1,3 +1,8 @@
 <header>
-    <button class="secondary-btn" (click)="logout()">Logout</button>
+    @if (authService.authState$ | async) {
+    <div class="user-info">
+        <button class="tertiary-btn" (click)="logout()">Logout</button>
+        <p>{{ authService.auth.currentUser?.email }}</p>
+    </div>
+    }
 </header>

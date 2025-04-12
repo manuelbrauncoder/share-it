@@ -6,4 +6,14 @@ header {
         linear-gradient(45deg, $color-black-bg 30%, $color-green-bg 70%);
     width: 100%;
     height: 100%;
+    @include dFlex($jc: flex-end);
+    padding: 0 0.75rem;
+
+    .user-info {
+        @include dFlex($fd: column, $ai: flex-end);
+
+        p {
+            font-size: 0.75rem;
+        }
+    }
 }

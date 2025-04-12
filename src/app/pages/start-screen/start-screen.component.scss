@@ -1,0 +1,14 @@
+@use '../../../styles.scss' as *;
+
+section {
+    @extend .contentMinHeight;
+    @include dFlex($fd: column, $jc: space-between, $g: 1rem);
+
+    .btns {
+        @include dFlex($fd: column, $g: 1rem);
+    }
+
+    .user-info {
+        
+    }
+}

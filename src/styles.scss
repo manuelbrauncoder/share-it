@@ -130,6 +130,22 @@ app-footer {
     }
 }
 
+.tertiary-btn {
+    @extend .hover-transition;
+    border: unset;
+    background: unset;
+    color: $color-v2-green-100;
+    font-size: 1.25rem;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+        text-decoration-color: $color-v2-green-100;
+        text-underline-offset: 4px;
+        @extend .hover-transition;
+    }
+}
+
 form {
     width: 100%;
     @include dFlex($fd: column, $g: 1rem);

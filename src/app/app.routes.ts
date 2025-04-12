@@ -1,3 +1,8 @@
+/**
+ * Use authGuard on Routes, that should be protected
+ * Only a logged in User can use them
+ */
+
 import { Routes } from '@angular/router';
 import { authGuard } from "./auth.guard";
 

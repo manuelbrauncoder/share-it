@@ -1,7 +1,6 @@
 import { AbstractControl } from '@angular/forms';
 import { AuthUser } from '../interfaces/AuthUser';
 import { User } from '../interfaces/User';
-import { v4 as uuidv4 } from 'uuid';
 
 
 export class UserHelper {

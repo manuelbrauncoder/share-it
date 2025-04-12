@@ -1,0 +1,11 @@
+@use '../styles.scss' as *;
+
+app-toast {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $color-blur-bg;
+    padding: 0.5rem 1rem;
+    border-radius: 100vw;
+}

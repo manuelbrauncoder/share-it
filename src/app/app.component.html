@@ -3,3 +3,7 @@
   <router-outlet />
 </main>
 <app-footer />
+
+@if (uiService.isToastPresented) {
+  <app-toast />
+}
