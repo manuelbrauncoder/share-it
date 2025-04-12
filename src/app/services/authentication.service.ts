@@ -1,6 +1,7 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   Auth,
+  authState,
   browserSessionPersistence,
   createUserWithEmailAndPassword,
   deleteUser,
@@ -12,6 +13,7 @@ import {
 import { AuthUser } from '../interfaces/AuthUser';
 import { from, Observable } from 'rxjs';
 import { FirestoreService } from './firestore.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +21,8 @@ import { FirestoreService } from './firestore.service';
 export class AuthenticationService {
   firestoreService = inject(FirestoreService);
   auth = inject(Auth);
-  currentUserSig = signal<AuthUser | null | undefined>(undefined);
+  authState$ = authState(this.auth);
+  router = inject(Router);
 
   constructor() {}
 
@@ -48,22 +51,10 @@ export class AuthenticationService {
     return from(promise);
   }
 
-  /**
-   * Save User data in a signal
-   *
-   * @param user AuthUser
-   */
-  setUserSignal(user: AuthUser) {
-    this.currentUserSig.set({
-      email: user.email,
-      name: user.name,
-    });
-  }
-
   logout(): Observable<void> {
     const promise = signOut(this.auth)
       .then(() => {
-        // do things after logout
+        this.router.navigate(['/login']);
       })
       .catch((err) => {
         // handle error
@@ -75,7 +66,7 @@ export class AuthenticationService {
     const currentUser = this.auth.currentUser;
     const promise = deleteUser(currentUser!)
       .then(() => {
-        // do things after user is deleted
+        this.router.navigate(['/login']);
       })
       .catch((err) => {
         // error handling

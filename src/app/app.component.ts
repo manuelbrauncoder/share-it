@@ -15,16 +15,8 @@ export class AppComponent {
   title = 'share-it';
 
   authService = inject(AuthenticationService);
-  currentUser: AuthUser | null | undefined;
 
   constructor() {
-    effect(() => {
-      this.currentUser = this.authService.currentUserSig();
-      if (this.currentUser) {
-        console.log("User:", this.currentUser);
-      } else {
-        console.log("no user logged in");
-      }
-    })
+    
   }
 }

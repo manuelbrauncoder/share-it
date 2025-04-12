@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from "./auth.guard";
 
 export const routes: Routes = [
     {
@@ -14,6 +15,7 @@ export const routes: Routes = [
     },
     {
         path: 'start',
+        canActivate: [authGuard],
         loadComponent: () => import('./pages/start-screen/start-screen.component').then((m) => m.StartScreenComponent)
     },
     {
