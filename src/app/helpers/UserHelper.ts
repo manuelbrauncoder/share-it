@@ -21,7 +21,6 @@ export class UserHelper {
   }
 
   /**
-   * 
    * Creates an User from AuthUser
    * 
    * @param user AuthUser

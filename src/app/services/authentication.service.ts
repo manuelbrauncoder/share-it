@@ -20,9 +20,10 @@ export class AuthenticationService {
    * @returns an Observable with the UserCredential
    */
   register(user: AuthUser): Observable<UserCredential> {
-    const promise = createUserWithEmailAndPassword(this.auth, user.email, user.pwd)
+    const promise = createUserWithEmailAndPassword(this.auth, user.email, user.pwd!)
     .then((userCredential: UserCredential) => {
-      this.firestoreService.saveUser(user, userCredential.user.uid)
+      this.firestoreService.saveUser(user, userCredential.user.uid);
+      this.setUserSignal(user);
       return userCredential;
     })
     .catch((err) => {
@@ -35,15 +36,28 @@ export class AuthenticationService {
     const promise = signInWithEmailAndPassword(
       this.auth,
       user.email,
-      user.pwd
+      user.pwd!
     )
       .then((userCredential: UserCredential) => {
+        this.setUserSignal(user);
         return userCredential
       })
       .catch((err) => {
         throw err;
       });
     return from(promise);
+  }
+
+  /**
+   * Save User data in a signal
+   * 
+   * @param user AuthUser
+   */
+  setUserSignal(user: AuthUser) {
+    this.currentUserSig.set({
+      email: user.email,
+      name: user.name
+    })
   }
 
   logout(): Observable<void> {
