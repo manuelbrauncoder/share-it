@@ -1,6 +1,14 @@
 @use '../../../styles.scss' as *;
 
 .toast {
-    color: $color-not-white;
     border: 1px solid $color-v2-green-100;
+    @include dFlex($g: 1rem);
+}
+
+.toast-error {
+    color: $color-error-red;
+}
+
+.toast-success {
+    color: $color-v2-green-100;
 }

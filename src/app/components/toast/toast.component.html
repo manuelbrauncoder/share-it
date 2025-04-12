@@ -1,8 +1,6 @@
-<div class="tost">
     @if (uiService.isToastError) {
-
+        <img src="assets/icons/check.svg" alt="exclamationmark icon">
     } @else {
-
+        <img src="assets/icons/check.svg" alt="check icon">
     }
-    <span>{{ uiService.toastMessage }}</span>
-</div>
+    <span [ngClass]="uiService.isToastError ? 'toast-error' : 'toast-success'">{{ uiService.toastMessage }}</span>

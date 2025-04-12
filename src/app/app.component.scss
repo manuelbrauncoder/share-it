@@ -5,7 +5,12 @@ app-toast {
     top: 2rem;
     left: 50%;
     transform: translateX(-50%);
-    background-color: $color-blur-bg;
+    background-color: $color-black-bg;
+    opacity: 0.8;
     padding: 0.5rem 1rem;
     border-radius: 100vw;
+    border: 1px solid $color-v2-green-100;
+    @include dFlex($g: 1rem);
+    white-space: nowrap;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
