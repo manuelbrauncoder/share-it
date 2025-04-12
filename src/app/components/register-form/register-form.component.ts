@@ -12,6 +12,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { UserHelper } from "../../helpers/UserHelper";
 
+
 @Component({
   selector: 'app-register-form',
   imports: [ReactiveFormsModule],
