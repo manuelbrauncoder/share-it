@@ -1,10 +1,16 @@
 <section>
     <h1>Share it</h1>
-    <div class="btns">
-        <button (click)="testToast()" class="primary-btn">erstellen</button>
-        <button class="secondary-btn">beitreten</button>
+    <div>
+        <h2>Erstelle eine neue Gruppe, oder trete einer bestehenden bei.</h2>
+        <div class="btns">
+            <button class="primary-btn">Erstellen</button>
+            <button class="secondary-btn">Beitreten</button>
+        </div>
     </div>
+    
     <div class="user-info">
-        <p>{{ authService.auth.currentUser?.email }}</p>
+        <p>{{ currentUser?.name }}</p>
+        <span>|</span>
+        <p>{{ currentUser?.email }}</p>
     </div>
 </section>

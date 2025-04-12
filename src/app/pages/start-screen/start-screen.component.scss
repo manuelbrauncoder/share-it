@@ -4,11 +4,19 @@ section {
     @extend .contentMinHeight;
     @include dFlex($fd: column, $jc: space-between, $g: 1rem);
 
-    .btns {
-        @include dFlex($fd: column, $g: 1rem);
+    >div {
+        h2 {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btns {
+            @include dFlex($g: 1rem);
+        }
     }
 
     .user-info {
-        
+        @include dFlex($g: 0.25rem);
     }
 }
