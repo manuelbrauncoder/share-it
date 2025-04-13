@@ -1,0 +1,9 @@
+<form [formGroup]="group" (ngSubmit)="submit()">
+    <fieldset>
+        <div class="form-field">
+            <label for="id">Gruppen ID</label>
+            <input type="text" formControlName="id" id="id">
+        </div>
+    </fieldset>
+    <button [disabled]="group.invalid" type="submit" class="primary-btn">Beitreten</button>
+</form>

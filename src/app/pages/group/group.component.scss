@@ -3,4 +3,12 @@
 section {
     @extend .contentMinHeight;
     @include dFlex($fd: column, $g: 1rem, $ai: flex-start, $jc: flex-start);
+
+    .members {
+        margin-top: auto;
+    }
+}
+
+.upper-btn {
+    transform: translateY(-60px) !important;
 }

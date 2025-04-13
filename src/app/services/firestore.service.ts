@@ -18,6 +18,9 @@ import { UserHelper } from '../helpers/UserHelper';
 import { FirestorePath } from '../enums/FirestorePath';
 import { Group } from '../interfaces/Group';
 import { User } from '../interfaces/User';
+import { setLogLevel, LogLevel } from "@angular/fire";
+
+setLogLevel(LogLevel.SILENT);
 
 @Injectable({
   providedIn: 'root',

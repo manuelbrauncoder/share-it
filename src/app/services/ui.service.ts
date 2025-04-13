@@ -9,6 +9,8 @@ export class UiService {
   toastMessage: string = "";
   isToastError: boolean = false;
 
+  isJoinGroupDialogPresented: boolean = false;
+
   constructor() { }
 
   showtoast() {

@@ -4,6 +4,7 @@ import { FirestoreService } from '../../services/firestore.service';
 import { Group } from '../../interfaces/Group';
 import { UiService } from '../../services/ui.service';
 import { User } from '../../interfaces/User';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-group',
@@ -21,9 +22,22 @@ export class GroupComponent implements OnInit {
   currentGroup?: Group;
   users: User[] = [];
 
+  constructor(private clipboard: Clipboard) {}
+
   ngOnInit(): void {
     this.groupID = this.activatedRoute.snapshot.paramMap.get('id');
     this.getCurrentGroup();
+  }
+
+  copyIDForSharing() {
+    if (this.groupID) {
+      const success = this.clipboard.copy(this.groupID);
+      if (success) {
+        this.uiService.setToastMessage(false, 'ID in Zwischenablage kopiert');
+      } else {
+        this.uiService.setToastMessage(true, 'Bitte wiederholen');
+      }
+    }
   }
 
   getCurrentGroup() {

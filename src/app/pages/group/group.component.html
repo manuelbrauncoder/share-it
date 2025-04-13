@@ -3,21 +3,31 @@
         <h1>{{ currentGroup?.title }}</h1>
         <p>{{ currentGroup?.desc }}</p>
     </div>
+
+    <hr class="divider-horizontal">
+
+    <div class="expenses">
+        <h2>Ausgaben:</h2>
+        <p>feature coming soon 🙂</p>
+    </div>
+
     <div class="members">
         <h2>Mitglieder:</h2>
         @if (users.length > 0) {
-            <div class="users">
-                @for (user of users; track $index) {
-                    <p>{{ user.name }}</p>
-                }
-            </div>
+        <div class="users">
+            @for (user of users; track $index) {
+            <p>{{ user.name }}</p>
+            }
+        </div>
         } @else {
-            <h3>Keine Mitglieder in dieser Gruppe</h3>
+        <h3>Keine Mitglieder in dieser Gruppe</h3>
         }
-    </div>
-    <div class="expenses">
-        <h2>Ausgaben:</h2>
     </div>
 </section>
 
-<button class="floating-btn">+</button>
+<button (click)="copyIDForSharing()" class="floating-btn upper-btn">
+    <img src="assets/icons/share.svg" alt="share icon">
+</button>
+<button class="floating-btn">
+    <img src="assets/icons/add.svg" alt="add icon">
+</button>

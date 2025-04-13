@@ -4,25 +4,29 @@
         <h2>Erstelle eine neue Gruppe, oder trete einer bestehenden bei.</h2>
         <div class="btns">
             <a class="primary-btn" routerLink="/create-group">Erstellen</a>
-            <button class="secondary-btn">Beitreten</button>
+            <button (click)="showJoinGroupDialog()" class="secondary-btn">Beitreten</button>
         </div>
     </div>
 
     @if (groups.length > 0) {
-        <div class="groups">
-            <h3>Gruppen</h3>
-            @for (group of groups; track $index) {
-                <button (click)="redirectToGroupDetail(group.id)" class="group">
-                    <a>{{ group.title }}</a>
-                    <img src="assets/icons/chevron_right.svg" alt="chevron_right icon">
-                </button>
-            }
-        </div>
+    <div class="groups">
+        <h3>Gruppen</h3>
+        @for (group of groups; track $index) {
+        <button (click)="redirectToGroupDetail(group.id)" class="group">
+            <a>{{ group.title }}</a>
+            <img src="assets/icons/chevron_right.svg" alt="chevron_right icon">
+        </button>
+        }
+    </div>
     }
-    
+
     <div class="user-info">
         <p>{{ currentUser?.name }}</p>
         <span>|</span>
         <p>{{ currentUser?.email }}</p>
     </div>
 </section>
+
+@if (uiService.isJoinGroupDialogPresented) {
+<app-join-group-dialog></app-join-group-dialog>
+}

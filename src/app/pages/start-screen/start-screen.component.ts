@@ -6,10 +6,11 @@ import { User } from '../../interfaces/User';
 import { Router, RouterLink } from '@angular/router';
 import { Group } from '../../interfaces/Group';
 import { Subscription } from 'rxjs';
+import { JoinGroupDialogComponent } from "../../components/join-group-dialog/join-group-dialog.component";
 
 @Component({
   selector: 'app-start-screen',
-  imports: [RouterLink],
+  imports: [RouterLink, JoinGroupDialogComponent],
   templateUrl: './start-screen.component.html',
   styleUrl: './start-screen.component.scss',
 })
@@ -24,7 +25,7 @@ export class StartScreenComponent implements OnDestroy, OnInit {
   groupsSubscription!: Subscription;
 
   redirectToGroupDetail(id: string) {
-    this.router.navigate(['/group', id])
+    this.router.navigate(['/group', id]);
   }
 
   ngOnDestroy(): void {
@@ -38,6 +39,10 @@ export class StartScreenComponent implements OnDestroy, OnInit {
     this.subscribeGroups();
   }
 
+  showJoinGroupDialog() {
+    this.uiService.isJoinGroupDialogPresented = true;
+  }
+
   /**
    * Subscribe the users groups
    */
@@ -48,7 +53,6 @@ export class StartScreenComponent implements OnDestroy, OnInit {
       .subscribe({
         next: (groups: Group[]) => {
           this.groups = groups;
-          console.log("groups:", groups);
         },
         error: (err) => { }
       })
