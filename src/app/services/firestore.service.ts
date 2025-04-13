@@ -1,10 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import {
+  collection,
+  collectionData,
   doc,
   DocumentSnapshot,
   Firestore,
   getDoc,
+  query,
   setDoc,
+  where,
 } from '@angular/fire/firestore';
 import { AuthUser } from '../interfaces/AuthUser';
 import { from, map, Observable } from 'rxjs';
@@ -74,5 +78,17 @@ export class FirestoreService {
         docSnap.exists() ? (docSnap.data() as User) : undefined
       )
     );
+  }
+
+  /**
+   * Fetching the group collections where the user is a member
+   * 
+   * @param id user id
+   * @returns an Observable with a Group Array
+   */
+  getGroupsByUserID(id: string): Observable<Group[]> {
+    const collRef = collection(this.firestore, FirestorePath.Groups);
+    const groupsQuery = query(collRef, where('users', 'array-contains', id));
+    return collectionData(groupsQuery) as Observable<Group[]>;
   }
 }

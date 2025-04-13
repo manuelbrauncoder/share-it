@@ -4,15 +4,34 @@ section {
     @extend .contentMinHeight;
     @include dFlex($fd: column, $jc: space-between, $g: 1rem);
 
-    >div {
+    .group-management {
         h2 {
             text-align: center;
             font-size: 1.1rem;
             margin-bottom: 1rem;
+            color: $color-v2-green-100;
         }
 
         .btns {
             @include dFlex($g: 1rem);
+        }
+    }
+
+    .groups {
+        @include dFlex($fd: column, $g: 0.5rem);
+
+        h3 {
+            margin-bottom: 1rem;
+            color: $color-v2-green-100;
+        }
+
+        .group {
+            border: 1px solid $color-not-white;
+            padding: 0.5rem 1rem;
+            border-radius: 100vw;
+            @include dFlex($g: 1rem);
+            background: unset;
+            color: $color-not-white;
         }
     }
 
