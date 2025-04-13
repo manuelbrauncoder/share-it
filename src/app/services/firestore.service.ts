@@ -4,6 +4,7 @@ import {
   collectionData,
   doc,
   DocumentData,
+  documentId,
   DocumentSnapshot,
   Firestore,
   getDoc,
@@ -37,13 +38,9 @@ export class FirestoreService {
   saveUser(authUser: AuthUser, id: string): Observable<void> {
     const user = UserHelper.createUser(authUser, id);
     const uploadRef = doc(this.firestore, FirestorePath.Users, user.id);
-    const promise = setDoc(uploadRef, user)
-      .then(() => {
-        // placeholder
-      })
-      .catch((err) => {
-        throw err;
-      });
+    const promise = setDoc(uploadRef, user).catch((err) => {
+      throw err;
+    });
     return from(promise);
   }
 
@@ -55,20 +52,16 @@ export class FirestoreService {
    */
   saveGroup(group: Group): Observable<void> {
     const uploadRef = doc(this.firestore, FirestorePath.Groups, group.id);
-    const promise = setDoc(uploadRef, group)
-      .then(() => {
-        // placeholder
-      })
-      .catch((err) => {
-        throw err;
-      });
+    const promise = setDoc(uploadRef, group).catch((err) => {
+      throw err;
+    });
     return from(promise);
   }
 
   /**
    * Fetches the group by the given id
-   * 
-   * @param id 
+   *
+   * @param id
    * @returns an Observable with the group or undefined if no group found
    */
   getGroupByID(id: string): Observable<Group | undefined> {
@@ -81,7 +74,7 @@ export class FirestoreService {
   }
 
   /**
-   * Fetches the user by id
+   * Fetches the user by the given id
    *
    * @param id user id
    * @returns an Observable with the User or undefined
@@ -93,6 +86,20 @@ export class FirestoreService {
         docSnap.exists() ? (docSnap.data() as User) : undefined
       )
     );
+  }
+
+  /**
+   * Fetches the users bei the given ids
+   * 
+   * !! The 'in' operator supports only 30 ids in the array !!
+   * 
+   * @param ids user ids
+   * @returns an Observable with an User Array
+   */
+  getUsersByIDs(ids: string[]): Observable<User[]> {
+    const usersRef = collection(this.firestore, FirestorePath.Users);
+    const usersQuery = query(usersRef, where(documentId(), 'in', ids));
+    return collectionData(usersQuery) as Observable<User[]>;
   }
 
   /**

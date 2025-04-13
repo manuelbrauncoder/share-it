@@ -1,0 +1,6 @@
+@use '../../../styles.scss' as *;
+
+section {
+    @extend .contentMinHeight;
+    @include dFlex($fd: column, $g: 1rem, $ai: flex-start, $jc: flex-start);
+}
