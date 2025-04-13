@@ -146,6 +146,22 @@ app-footer {
     }
 }
 
+.floating-btn {
+    position: fixed;
+    bottom: 70px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    border: 1px solid $color-v2-green-100;
+    color: $color-not-white;
+    background-color: $color-black-bg;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    @include dFlex();
+    font-size: 40px;
+    font-weight: 500;
+}
+
 form {
     width: 100%;
     @include dFlex($fd: column, $g: 1rem);
