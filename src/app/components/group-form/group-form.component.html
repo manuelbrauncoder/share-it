@@ -1,0 +1,13 @@
+<form [formGroup]="group" (ngSubmit)="submit()">
+    <fieldset>
+        <div class="form-field">
+            <label for="title">Titel</label>
+            <input type="text" formControlName="title" id="title">
+        </div>
+        <div class="form-field">
+            <label for="pwd">Beschreibung</label>
+            <input type="text" formControlName="desc" id="desc">
+        </div>
+    </fieldset>
+    <button [disabled]="group.invalid" type="submit" class="primary-btn">Erstellen</button>
+</form>

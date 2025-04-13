@@ -11,6 +11,7 @@ import { AuthUser } from '../../interfaces/AuthUser';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { UserHelper } from "../../helpers/UserHelper";
+import { UiService } from '../../services/ui.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { UserHelper } from "../../helpers/UserHelper";
 export class RegisterFormComponent {
   authService = inject(AuthenticationService);
   router = inject(Router);
+  uiService = inject(UiService);
 
   user = new FormGroup(
     {
@@ -49,16 +51,14 @@ export class RegisterFormComponent {
   registerUser(user: AuthUser) {
     this.authService.register(user).subscribe({
       next: () => {
-        // show toast message success
+        this.uiService.setToastMessage(false, 'Willkommen bei Share-it!');
         this.user.reset();
         setTimeout(() => {
           this.router.navigate(['/start'])
         }, 2000);
       },
       error: (err) => {
-        // show toast message error
-        console.log('error', err);
-        
+        this.uiService.setToastMessage(true, 'Fehler beim registrieren');
       },
     });
   }

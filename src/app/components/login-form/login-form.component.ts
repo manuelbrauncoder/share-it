@@ -9,6 +9,7 @@ import { AuthUser } from '../../interfaces/AuthUser';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { UserHelper } from '../../helpers/UserHelper';
+import { UiService } from '../../services/ui.service';
 
 @Component({
   selector: 'app-login-form',
@@ -19,6 +20,8 @@ import { UserHelper } from '../../helpers/UserHelper';
 export class LoginFormComponent {
   authService = inject(AuthenticationService);
   router = inject(Router);
+  uiService = inject(UiService);
+  
 
   user = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -38,14 +41,13 @@ export class LoginFormComponent {
   loginUser(user: AuthUser) {
     this.authService.login(user).subscribe({
       next: () => {
-        // show toast message success
         this.user.reset();
         setTimeout(() => {
           this.router.navigate(['/start']);
         }, 2000);
       },
       error: (err) => {
-        // show toast message error
+        this.uiService.setToastMessage(true, 'Fehler beim einloggen, bitte nocheinmal probieren.')
         console.log('error', err);
       },
     });

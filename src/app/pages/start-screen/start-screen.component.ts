@@ -3,11 +3,11 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { FirestoreService } from '../../services/firestore.service';
 import { UiService } from '../../services/ui.service';
 import { User } from '../../interfaces/User';
-import { UserHelper } from "../../helpers/UserHelper";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-start-screen',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './start-screen.component.html',
   styleUrl: './start-screen.component.scss',
 })
@@ -15,12 +15,16 @@ export class StartScreenComponent {
   authService = inject(AuthenticationService);
   firestoreService = inject(FirestoreService);
   uiService = inject(UiService);
+
   currentUser?: User
 
   constructor() {
     this.getCurrentUser();
   }
 
+  /**
+   * Fetches the current user from firestore
+   */
   getCurrentUser() {
     const id = this.authService.auth.currentUser?.uid;
     if (id) {
@@ -29,7 +33,6 @@ export class StartScreenComponent {
         next: (data: User | undefined) => {
           if (data) {
             this.currentUser = data;
-            console.log(this.currentUser);
           } else {
             console.log('user not found');
           }
@@ -38,8 +41,6 @@ export class StartScreenComponent {
           console.log('Error fetching User', err);
         }
       });
-    } else {
-      console.log('No User logged in');
     }
   }
 }
