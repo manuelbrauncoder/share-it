@@ -3,6 +3,7 @@ import {
   collection,
   collectionData,
   doc,
+  DocumentData,
   DocumentSnapshot,
   Firestore,
   getDoc,
@@ -28,10 +29,10 @@ export class FirestoreService {
   /**
    * Save a AuthUser in firestore,
    * replace it if the id exists
-   * 
-   * @param authUser 
-   * @param id 
-   * @returns 
+   *
+   * @param authUser
+   * @param id
+   * @returns
    */
   saveUser(authUser: AuthUser, id: string): Observable<void> {
     const user = UserHelper.createUser(authUser, id);
@@ -49,8 +50,8 @@ export class FirestoreService {
   /**
    * Save a group in firestore
    * replaces the group if the id exists
-   * @param group 
-   * @returns 
+   * @param group
+   * @returns
    */
   saveGroup(group: Group): Observable<void> {
     const uploadRef = doc(this.firestore, FirestorePath.Groups, group.id);
@@ -60,14 +61,28 @@ export class FirestoreService {
       })
       .catch((err) => {
         throw err;
-        
       });
     return from(promise);
   }
 
   /**
-   * Fetches the user by id
+   * Fetches the group by the given id
    * 
+   * @param id 
+   * @returns an Observable with the group or undefined if no group found
+   */
+  getGroupByID(id: string): Observable<Group | undefined> {
+    const docRef = doc(this.firestore, FirestorePath.Groups, id);
+    return from(getDoc(docRef)).pipe(
+      map((docSnap: DocumentSnapshot<DocumentData>) =>
+        docSnap.exists() ? (docSnap.data() as Group) : undefined
+      )
+    );
+  }
+
+  /**
+   * Fetches the user by id
+   *
    * @param id user id
    * @returns an Observable with the User or undefined
    */
@@ -82,7 +97,7 @@ export class FirestoreService {
 
   /**
    * Fetching the group collections where the user is a member
-   * 
+   *
    * @param id user id
    * @returns an Observable with a Group Array
    */

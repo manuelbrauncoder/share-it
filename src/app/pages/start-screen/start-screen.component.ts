@@ -23,10 +23,6 @@ export class StartScreenComponent implements OnDestroy, OnInit {
   groups: Group[] = [];
   groupsSubscription!: Subscription;
 
-  constructor() {
-    this.getCurrentUser();
-  }
-
   redirectToGroupDetail(id: string) {
     this.router.navigate(['/group', id])
   }
@@ -38,6 +34,7 @@ export class StartScreenComponent implements OnDestroy, OnInit {
   }
 
   ngOnInit(): void {
+    this.getCurrentUser();
     this.subscribeGroups();
   }
 

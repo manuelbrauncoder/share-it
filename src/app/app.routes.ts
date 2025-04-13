@@ -36,5 +36,14 @@ export const routes: Routes = [
         path: 'group/:id',
         canActivate: [authGuard],
         loadComponent: () => import('./pages/group/group.component').then((m) => m.GroupComponent)
-    }
+    },
+
+    // wildcard route
+    {
+        path: '**', redirectTo: 'not-found', pathMatch: 'full'
+    },
+    {
+        path: 'not-found',
+        loadComponent: () => import('./pages/page-not-found/page-not-found.component').then((m) => m.PageNotFoundComponent)
+    },
 ];
