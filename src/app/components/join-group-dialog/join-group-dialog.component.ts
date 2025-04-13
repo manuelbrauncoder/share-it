@@ -20,6 +20,10 @@ export class JoinGroupDialogComponent {
     id: new FormControl('', [Validators.required, Validators.minLength(10)]),
   });
 
+  closeDialog() {
+    this.uiService.isJoinGroupDialogPresented = false;
+  }
+
   submit() {
     if (this.group.valid) {
       const id = this.group.get('id')?.value;
@@ -39,14 +43,14 @@ export class JoinGroupDialogComponent {
     this.firestoreService.saveGroup(group).subscribe({
       next: () => {
         this.uiService.setToastMessage(false, 'Das hat geklappt 🙂');
-        this.uiService.isJoinGroupDialogPresented = false;
+        this.closeDialog();
       },
       error: (err) => {
         this.uiService.setToastMessage(
           true,
           'Ooops, da ist etwas schief gelaufen 🙁'
         );
-        this.uiService.isJoinGroupDialogPresented = false;
+        this.closeDialog();
       },
     });
   }
