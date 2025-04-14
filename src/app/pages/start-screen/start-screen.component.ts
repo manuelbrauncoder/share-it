@@ -7,10 +7,12 @@ import { Router, RouterLink } from '@angular/router';
 import { Group } from '../../interfaces/Group';
 import { Subscription } from 'rxjs';
 import { JoinGroupDialogComponent } from "../../components/join-group-dialog/join-group-dialog.component";
+import { slideFromBottom } from "../../utils/animations";
 
 @Component({
   selector: 'app-start-screen',
   imports: [RouterLink, JoinGroupDialogComponent],
+  animations: [slideFromBottom],
   templateUrl: './start-screen.component.html',
   styleUrl: './start-screen.component.scss',
 })
@@ -41,6 +43,10 @@ export class StartScreenComponent implements OnDestroy, OnInit {
 
   showJoinGroupDialog() {
     this.uiService.isJoinGroupDialogPresented = true;
+  }
+
+  hideJoinGroupDialog() {
+    this.uiService.isJoinGroupDialogPresented = false;
   }
 
   /**

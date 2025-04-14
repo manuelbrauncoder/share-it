@@ -4,8 +4,11 @@ section {
     @extend .contentMinHeight;
     @include dFlex($fd: column, $g: 1rem, $ai: flex-start, $jc: flex-start);
 
-    .members {
-        margin-top: auto;
+    .group {
+        margin-bottom: 2rem;
+        border-bottom: 1px solid $color-not-white;
+        width: 100%;
+        padding-bottom: 0.5rem;
     }
 }
 

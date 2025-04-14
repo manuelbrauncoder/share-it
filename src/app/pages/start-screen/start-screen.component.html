@@ -17,6 +17,9 @@
         </button>
         }
     </div>
+    } @else {
+        <h3>Noch keine Gruppen vorhanden</h3>
+        <p>Erstelle eine neue, oder trete einer bestehenden Gruppe bei.</p>
     }
 
     <div class="user-info">
@@ -27,5 +30,6 @@
 </section>
 
 @if (uiService.isJoinGroupDialogPresented) {
-<app-join-group-dialog></app-join-group-dialog>
+<app-join-group-dialog @slideFromBottom></app-join-group-dialog>
+<div (click)="hideJoinGroupDialog()" class="dialog-bg"></div>
 }

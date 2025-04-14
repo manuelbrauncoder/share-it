@@ -22,10 +22,9 @@ export class LoginFormComponent {
   router = inject(Router);
   uiService = inject(UiService);
   
-
   user = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    pwd: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    pwd: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
   });
 
   submit() {

@@ -32,6 +32,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/app-info/app-info.component').then((m) => m.AppInfoComponent)
     },
     {
+        path: 'imprint',
+        loadComponent: () => import('./pages/imprint/imprint.component').then((m) => m.ImprintComponent)
+    },
+    {
         path: 'create-group',
         canActivate: [authGuard],
         loadComponent: () => import('./pages/create-group/create-group.component').then((m) => m.CreateGroupComponent)

@@ -14,6 +14,7 @@ export class UiService {
 
   isJoinGroupDialogPresented: boolean = false;
   isSidebarPresented: boolean = false;
+  isAddExpenseDialogPresented: boolean = false;
 
   constructor() { }
 

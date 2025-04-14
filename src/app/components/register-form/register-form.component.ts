@@ -27,13 +27,13 @@ export class RegisterFormComponent {
 
   user = new FormGroup(
     {
-      email: new FormControl('', [Validators.required, Validators.email]),
-      pwd: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      pwdRepeat: new FormControl('', [
+      email: new FormControl<string>('', [Validators.required, Validators.email]),
+      pwd: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
+      pwdRepeat: new FormControl<string>('', [
         Validators.required,
         Validators.minLength(6),
       ]),
-      name: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      name: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
     },
     { validators: this.passwordMatchValidator }
   );

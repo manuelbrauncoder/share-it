@@ -4,6 +4,6 @@ export interface Expense {
     value: number
     payerID: string;
     title: string;
-    desc?: string;
+    desc: string;
     imagePath?: string;
 }

@@ -1,0 +1,7 @@
+@use '../../../styles.scss' as *;
+
+section {
+    @extend .contentMinHeight;
+    padding: 1rem;
+    @include dFlex($fd: column, $ai: flex-start, $jc: flex-start, $g: 1rem);
+}

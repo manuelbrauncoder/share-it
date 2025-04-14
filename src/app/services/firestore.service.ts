@@ -19,6 +19,7 @@ import { FirestorePath } from '../enums/FirestorePath';
 import { Group } from '../interfaces/Group';
 import { User } from '../interfaces/User';
 import { setLogLevel, LogLevel } from "@angular/fire";
+import { Expense } from '../interfaces/Expense';
 
 setLogLevel(LogLevel.SILENT);
 
@@ -56,6 +57,21 @@ export class FirestoreService {
   saveGroup(group: Group): Observable<void> {
     const uploadRef = doc(this.firestore, FirestorePath.Groups, group.id);
     const promise = setDoc(uploadRef, group).catch((err) => {
+      throw err;
+    });
+    return from(promise);
+  }
+
+  /**
+   * Save a expense in firestore or
+   * replace it if the id exists
+   * 
+   * @param expense 
+   * @returns 
+   */
+  saveExpense(expense: Expense): Observable<void> {
+    const uploadRef = doc(this.firestore, FirestorePath.Expanses, expense.id);
+    const promise = setDoc(uploadRef, expense).catch((err) => {
       throw err;
     });
     return from(promise);

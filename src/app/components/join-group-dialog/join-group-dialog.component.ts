@@ -17,7 +17,7 @@ export class JoinGroupDialogComponent {
   uiService = inject(UiService);
 
   group = new FormGroup({
-    id: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    id: new FormControl<string>('', [Validators.required, Validators.minLength(10)]),
   });
 
   closeDialog() {

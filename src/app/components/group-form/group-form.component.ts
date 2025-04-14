@@ -25,8 +25,8 @@ export class GroupFormComponent {
   authService = inject(AuthenticationService);
 
   group = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    desc: new FormControl('', [Validators.minLength(4)]),
+    title: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
+    desc: new FormControl<string>('', [Validators.minLength(4)]),
   });
 
   submit() {
