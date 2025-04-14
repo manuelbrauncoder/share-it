@@ -1,8 +1,13 @@
 <header>
-    @if (authService.authState$ | async) {
-    <div class="user-info">
-        <button class="tertiary-btn" (click)="logout()">Logout</button>
-        <p>{{ authService.auth.currentUser?.email }}</p>
+
+    <h1>Share it</h1>
+
+    <div (click)="toggleSidebar()" class="burgerMenu" [ngClass]="!uiService.isSidebarPresented ? 'burgerMenu' : 'burgerMenuClosed'">
+        <span class="line top"></span>
+        <span class="line middle"></span>
+        <span class="line bottom"></span>
     </div>
-    }
+    <div class="sidebar" [ngClass]="{'hideSidebar': !uiService.isSidebarPresented, 'showSidebar': uiService.isSidebarPresented}">
+        <app-sidebar></app-sidebar>
+    </div>
 </header>

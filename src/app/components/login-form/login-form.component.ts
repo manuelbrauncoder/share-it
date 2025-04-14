@@ -44,7 +44,7 @@ export class LoginFormComponent {
         this.user.reset();
         setTimeout(() => {
           this.router.navigate(['/start']);
-        }, 2000);
+        }, 300);
       },
       error: (err) => {
         this.uiService.setToastMessage(true, 'Fehler beim einloggen, bitte nocheinmal probieren.')

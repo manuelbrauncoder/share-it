@@ -1,0 +1,12 @@
+<aside>
+    <a (click)="closeAndRedirect('/profile')">Profil</a>
+    <a (click)="closeAndRedirect('/start')">Start</a>
+    <a (click)="closeAndRedirect('/app-info')">Info</a>
+    <a (click)="closeAndRedirect('/imprint')">Impressum</a>
+    @if (authService.authState$ | async) {
+        <div class="user-info">
+            <button class="tertiary-btn" (click)="logout()">Logout</button>
+            <p>{{ authService.auth.currentUser?.email }}</p>
+        </div>
+        }
+</aside>

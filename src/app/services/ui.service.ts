@@ -1,17 +1,25 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiService {
 
+  router = inject(Router);
+
   isToastPresented: boolean = false;
   toastMessage: string = "";
   isToastError: boolean = false;
 
   isJoinGroupDialogPresented: boolean = false;
+  isSidebarPresented: boolean = false;
 
   constructor() { }
+
+  redirectTo(path: string) {
+    this.router.navigate([path]);
+  }
 
   showtoast() {
     this.isToastPresented = true;

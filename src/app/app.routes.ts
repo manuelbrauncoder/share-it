@@ -28,6 +28,10 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/welcome/welcome.component').then((m) => m.WelcomeComponent)
     },
     {
+        path: 'app-info',
+        loadComponent: () => import('./pages/app-info/app-info.component').then((m) => m.AppInfoComponent)
+    },
+    {
         path: 'create-group',
         canActivate: [authGuard],
         loadComponent: () => import('./pages/create-group/create-group.component').then((m) => m.CreateGroupComponent)

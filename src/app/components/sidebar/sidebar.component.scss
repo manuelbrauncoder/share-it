@@ -1,0 +1,21 @@
+@use '../../../styles.scss' as *;
+
+aside {
+    @include dFlex($fd: column, $g: 0.5rem, $ai: flex-end, $jc: flex-start);
+    height: calc(100dvh - $height-header-footer);
+    padding-bottom: 2rem;
+
+    .user-info {
+        @include dFlex($fd: column, $ai: flex-end);
+        margin-top: auto;
+
+        p {
+            font-size: 0.75rem;
+        }
+    }
+
+    a {
+        color: $color-not-white;
+        font-size: 1.5rem;
+    }
+}
