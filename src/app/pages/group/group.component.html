@@ -8,26 +8,47 @@
         <h3>Mitglieder:</h3>
         @if (users.length > 0) {
         <div class="users">
+            <ul>
             @for (user of users; track $index) {
-            <p>{{ user.name }}</p>
+            <li>{{ user.name }}</li>
             }
+        </ul>
         </div>
         } @else {
-        <h3>Keine Mitglieder in dieser Gruppe</h3>
+        <p>Keine Mitglieder in dieser Gruppe</p>
         }
     </div>
 
     <div class="expenses">
-        <h2>Ausgaben:</h2>
-        <p>feature coming soon 🙂</p>
+        <h3>Ausgaben:</h3>
+        @if (expenses.length > 0) {
+            <ul class="expenses-list">
+            @for (expense of expenses; track $index) {
+                <li>
+                    <div class="expense">
+                        <span>{{ expense.title }}:</span>
+                        <span>{{ expense.value | number: '2.2-2' }}</span>
+                        <span>{{ expense.currency }}</span>
+                    </div>
+                </li>
+            }
+        </ul>
+        } @else {
+            <p>Noch keine Ausgaben in dieser Gruppe.</p>
+        }
     </div>
 
-    
+
 </section>
 
 <button (click)="copyIDForSharing()" class="floating-btn upper-btn">
     <img src="assets/icons/share.svg" alt="share icon">
 </button>
-<button class="floating-btn">
+<button (click)="toggleAddExpenseDialog()" class="floating-btn">
     <img src="assets/icons/add.svg" alt="add icon">
 </button>
+
+@if (uiService.isAddExpenseDialogPresented) {
+<app-add-expense-form class="dialog" @slideFromBottom [group]="currentGroup"></app-add-expense-form>
+<div (click)="toggleAddExpenseDialog()" class="dialog-bg"></div>
+}

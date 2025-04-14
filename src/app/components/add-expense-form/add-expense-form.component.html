@@ -1,1 +1,18 @@
-<p>add-expense-form works!</p>
+<form [formGroup]="expense" (ngSubmit)="submit()">
+    <fieldset>
+        <div class="form-field">
+            <label for="title">Titel</label>
+            <input type="text" formControlName="title" id="title">
+        </div>
+        <div class="form-field">
+            <label for="desc">Beschreibung</label>
+            <input type="text" formControlName="desc" id="desc">
+        </div>
+        <div class="form-field">
+            <label for="value">Preis</label>
+            <input type="text" inputmode="numeric" formControlName="value" id="value">
+        </div>
+    </fieldset>
+    <button [disabled]="expense.invalid" type="submit" class="primary-btn">Speichern</button>
+    <button (click)="cancel()" class="secondary-btn">Abbrechen</button>
+</form>

@@ -32,7 +32,7 @@ export class AuthenticationService {
         return createUserWithEmailAndPassword(this.auth, user.email, user.pwd!);
       })
       .then((userCredential: UserCredential) => {
-        this.firestoreService.saveUser(user, userCredential.user.uid);
+        this.firestoreService.saveAuthUser(user, userCredential.user.uid);
       })
       .catch((err) => {
         throw err;

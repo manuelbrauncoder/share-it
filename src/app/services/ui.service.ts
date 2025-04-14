@@ -18,10 +18,18 @@ export class UiService {
 
   constructor() { }
 
+  /**
+   * redirect to the given path
+   * @param path 
+   */
   redirectTo(path: string) {
     this.router.navigate([path]);
   }
 
+  /**
+   * shows the toast message and hide it
+   * after timeout
+   */
   showtoast() {
     this.isToastPresented = true;
     setTimeout(() => {
@@ -29,10 +37,14 @@ export class UiService {
     }, 3000);
   }
 
+  /**
+   * 
+   * @param isToastError set to true if message is an error
+   * @param toastMessage the message string
+   */
   setToastMessage(isToastError: boolean, toastMessage: string) {
     this.toastMessage = toastMessage;
     this.isToastError = isToastError;
-
     this.showtoast();
   }
 }

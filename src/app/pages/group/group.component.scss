@@ -4,11 +4,26 @@ section {
     @extend .contentMinHeight;
     @include dFlex($fd: column, $g: 1rem, $ai: flex-start, $jc: flex-start);
 
+    h3 {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        margin-bottom: 0.5rem;
+    }
+
     .group {
         margin-bottom: 2rem;
         border-bottom: 1px solid $color-not-white;
         width: 100%;
         padding-bottom: 0.5rem;
+    }
+
+    .expenses {
+        .expenses-list {
+            
+            .expense {
+                @include dFlex($g: 0.25rem, $jc: flex-start);
+            }
+        }
     }
 }
 

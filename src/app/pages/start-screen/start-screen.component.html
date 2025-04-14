@@ -30,6 +30,6 @@
 </section>
 
 @if (uiService.isJoinGroupDialogPresented) {
-<app-join-group-dialog @slideFromBottom></app-join-group-dialog>
+<app-join-group-dialog class="dialog" @slideFromBottom></app-join-group-dialog>
 <div (click)="hideJoinGroupDialog()" class="dialog-bg"></div>
 }

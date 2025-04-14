@@ -8,8 +8,10 @@ import {
   DocumentSnapshot,
   Firestore,
   getDoc,
+  onSnapshot,
   query,
   setDoc,
+  Unsubscribe,
   where,
 } from '@angular/fire/firestore';
 import { AuthUser } from '../interfaces/AuthUser';
@@ -18,7 +20,7 @@ import { UserHelper } from '../helpers/UserHelper';
 import { FirestorePath } from '../enums/FirestorePath';
 import { Group } from '../interfaces/Group';
 import { User } from '../interfaces/User';
-import { setLogLevel, LogLevel } from "@angular/fire";
+import { setLogLevel, LogLevel } from '@angular/fire';
 import { Expense } from '../interfaces/Expense';
 
 setLogLevel(LogLevel.SILENT);
@@ -33,14 +35,27 @@ export class FirestoreService {
 
   /**
    * Save a AuthUser in firestore,
-   * replace it if the id exists
    *
    * @param authUser
    * @param id
    * @returns
    */
-  saveUser(authUser: AuthUser, id: string): Observable<void> {
+  saveAuthUser(authUser: AuthUser, id: string): Observable<void> {
     const user = UserHelper.createUser(authUser, id);
+    const uploadRef = doc(this.firestore, FirestorePath.Users, user.id);
+    const promise = setDoc(uploadRef, user).catch((err) => {
+      throw err;
+    });
+    return from(promise);
+  }
+
+  /**
+   * Save a User in firestore or replace it
+   * 
+   * @param user 
+   * @returns 
+   */
+  saveUser(user: User): Observable<void> {
     const uploadRef = doc(this.firestore, FirestorePath.Users, user.id);
     const promise = setDoc(uploadRef, user).catch((err) => {
       throw err;
@@ -65,13 +80,13 @@ export class FirestoreService {
   /**
    * Save a expense in firestore or
    * replace it if the id exists
-   * 
-   * @param expense 
-   * @returns 
+   *
+   * @param expense
+   * @returns
    */
   saveExpense(expense: Expense): Observable<void> {
     const uploadRef = doc(this.firestore, FirestorePath.Expanses, expense.id);
-    const promise = setDoc(uploadRef, expense).catch((err) => {
+    const promise = setDoc(uploadRef, expense, { merge: true }).catch((err) => {
       throw err;
     });
     return from(promise);
@@ -108,12 +123,26 @@ export class FirestoreService {
   }
 
   /**
-   * Fetches the users bei the given ids
-   * 
+   * Fetches the expenses by the given ids
+   *
    * !! The 'in' operator supports only 30 ids in the array !!
-   * 
-   * @param ids user ids
-   * @returns an Observable with an User Array
+   *
+   * @param ids expense ids
+   * @returns
+   */
+  getExpensesForGroup(ids: string[]): Observable<Expense[]> {
+    const expensesRef = collection(this.firestore, FirestorePath.Expanses);
+    const expensesQuery = query(expensesRef, where(documentId(), 'in', ids));
+    return collectionData(expensesQuery) as Observable<Expense[]>;
+  }
+
+  /**
+   * Fetches the users bei the given ids
+   *
+   * !! The 'in' operator supports only 30 ids in the array !!
+   *
+   * @param ids users ids
+   * @returns
    */
   getUsersByIDs(ids: string[]): Observable<User[]> {
     const usersRef = collection(this.firestore, FirestorePath.Users);
@@ -125,7 +154,7 @@ export class FirestoreService {
    * Fetching the group collections where the user is a member
    *
    * @param id user id
-   * @returns an Observable with a Group Array
+   * @returns
    */
   getGroupsByUserID(id: string): Observable<Group[]> {
     const collRef = collection(this.firestore, FirestorePath.Groups);

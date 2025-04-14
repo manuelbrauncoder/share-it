@@ -3,6 +3,7 @@ export interface Expense {
     currency: string;
     value: number
     payerID: string;
+    groupID: string;
     title: string;
     desc: string;
     imagePath?: string;
